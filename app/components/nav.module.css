@@ -1,0 +1,25 @@
+.wrapper {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 20;
+}
+
+.button {
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  background: transparent;
+  font-family: var(--font-geist-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
