@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { HeroGrid } from "./components/hero-grid";
 import { Nav } from "./components/nav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const title = Space_Grotesk({
+  variable: "--font-title",
+  weight: ["500"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const secondary = Space_Mono({
+  variable: "--font-secondary",
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -28,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${styles.html}`}
+      className={`${title.variable} ${secondary.variable} ${styles.html}`}
     >
       <body className={styles.body}>
         <HeroGrid />

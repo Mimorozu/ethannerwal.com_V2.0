@@ -16,11 +16,34 @@
   position: relative;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .image {
   object-fit: cover;
   filter: contrast(1.25);
+}
+
+.nestedGrid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.nestedGrid span {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  padding-bottom: 1.5rem;
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
 }
 
 .copy {
@@ -49,20 +72,11 @@
   border: 0;
 }
 
-.headline {
-  mix-blend-mode: difference;
-  font-size: clamp(2.5rem, 11.3vw, 24rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  color: #fff;
-}
-
 .subtitle {
   mix-blend-mode: difference;
   margin-top: 1rem;
-  font-family: var(--font-geist-mono);
-  font-size: 0.875rem;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
   color: #fff;
 }
 
@@ -71,11 +85,18 @@
 }
 
 .fitLineText {
-  mix-blend-mode: difference;
+  mix-blend-mode: exclusion;
+  font-family: var(--font-title);
   display: inline-block;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.05;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: #fff;
+}
+
+.fitLineTextAccent {
+  mix-blend-mode: difference;
+  letter-spacing: -0.01em;
+  color: #7c2727;
 }

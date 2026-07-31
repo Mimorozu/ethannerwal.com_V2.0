@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, useState } from "react";
+import { ImageReveal } from "./image-reveal";
 import styles from "./hero-grid.module.css";
 
 // Each route owns one grid column: the image shown behind it and the hero copy shown on top of it.
@@ -12,24 +12,28 @@ const columns = [
     src: "/street.jpg",
     title: "About",
     subtitle: "Placeholder — page content coming soon.",
+    accent: true,
   },
   {
     path: "/",
     src: "/walk.jpg",
     title: "ETHAN\nNERWAL",
     subtitle: "Software engineer — portfolio in progress.",
+    accent: false,
   },
   {
     path: "/projects",
     src: "/street.jpg",
     title: "Projects",
     subtitle: "Placeholder — page content coming soon.",
+    accent: true,
   },
   {
     path: "/contact",
     src: "/street.jpg",
     title: "Contact",
     subtitle: "Placeholder — page content coming soon.",
+    accent: true,
   },
 ];
 
@@ -45,7 +49,7 @@ export function HeroGrid() {
       {columns.map((column, i) => (
         <div key={column.path} className={styles.column}>
           {i === activeIndex && (
-            <Image
+            <ImageReveal
               src={column.src}
               alt=""
               fill
@@ -54,34 +58,44 @@ export function HeroGrid() {
               className={styles.image}
             />
           )}
+          {i === 3 && (
+            <div className={styles.nestedGrid}>
+              <span>Custom <br></br>software</span>
+              <span>Web<br></br>Development</span>
+              <span>Optimized <br></br>Workflows</span>
+            </div>
+          )}
         </div>
       ))}
 
-      {active && <HeroCopy title={active.title} subtitle={active.subtitle} />}
+      {active && (
+        <HeroCopy title={active.title} subtitle={active.subtitle} accent={active.accent} />
+      )}
     </div>
   );
 }
 
-// Headline + subhead for the active route. Multi-line titles render each word as its own element,
-// independently font-sized (never stretched) so every line's natural width fills the same edge.
-function HeroCopy({ title, subtitle }: { title: string; subtitle: string }) {
+// Headline + subhead for the active route. Every line renders as its own element, independently
+// font-sized (never stretched) so each line's natural width fills the same edge — this has to run
+// per line rather than off a single static font-size, since word length and font both affect it.
+function HeroCopy({
+  title,
+  subtitle,
+  accent,
+}: {
+  title: string;
+  subtitle: string;
+  accent: boolean;
+}) {
   const lines = title.split("\n");
 
   return (
     <div className={styles.copy}>
       <div className={styles.copyBox}>
-        {lines.length > 1 ? (
-          <h1 className={styles.srOnly}>{title.replace(/\n/g, " ")}</h1>
-        ) : null}
-        {lines.map((line, i) =>
-          lines.length > 1 ? (
-            <FitLine key={line} text={line} aria-hidden />
-          ) : (
-            <h1 key={line} className={styles.headline}>
-              {line}
-            </h1>
-          ),
-        )}
+        <h1 className={styles.srOnly}>{title.replace(/\n/g, " ")}</h1>
+        {lines.map((line) => (
+          <FitLine key={line} text={line} accent={accent} aria-hidden />
+        ))}
         <p className={styles.subtitle}>{subtitle}</p>
       </div>
     </div>
@@ -90,7 +104,11 @@ function HeroCopy({ title, subtitle }: { title: string; subtitle: string }) {
 
 // One line of text, scaled (never stretched) so its natural width exactly fills its container.
 // Measures itself at a reference size, then derives the font-size that hits 100% width.
-function FitLine({ text, ...rest }: { text: string } & React.AriaAttributes) {
+function FitLine({
+  text,
+  accent,
+  ...rest
+}: { text: string; accent?: boolean } & React.AriaAttributes) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState<number | null>(null);
@@ -130,7 +148,7 @@ function FitLine({ text, ...rest }: { text: string } & React.AriaAttributes) {
         {...rest}
         ref={textRef}
         style={{ fontSize: fontSize ?? 100, visibility: fontSize ? "visible" : "hidden" }}
-        className={styles.fitLineText}
+        className={`${styles.fitLineText} ${accent ? styles.fitLineTextAccent : ""}`}
       >
         {text}
       </div>

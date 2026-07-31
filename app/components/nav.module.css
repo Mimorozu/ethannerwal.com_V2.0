@@ -10,8 +10,8 @@
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   background: transparent;
-  font-family: var(--font-geist-mono);
-  font-size: 0.75rem;
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--foreground);
@@ -21,5 +21,65 @@
 
 .button:hover {
   border-color: var(--accent);
+  color: var(--accent);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  background: color-mix(in srgb, var(--background) 95%, transparent);
+  backdrop-filter: blur(30px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlayColumn {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlayImageFrame {
+  position: absolute;
+  inset: 2rem;
+  overflow: hidden;
+  border-radius: 40px;
+}
+
+.overlayImage {
+  object-fit: cover;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.link {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.link:hover {
   color: var(--accent);
 }
