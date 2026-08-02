@@ -1,0 +1,110 @@
+.section {
+  --outer-inset: clamp(1.5rem, 6vw, 5rem);
+  --tile-inset: clamp(1rem, 2vw, 1.5rem);
+  padding-inline: var(--outer-inset);
+  padding-top: clamp(4rem, 10vw, 6rem);
+}
+
+.title {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  column-gap: 2.5rem;
+  padding-inline: var(--tile-inset);
+  margin-bottom: 3.5rem;
+}
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.heading {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.subtitle {
+  font-family: var(--font-secondary);
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  color: var(--muted-foreground);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.titleVisible {
+  opacity: 1;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: clamp(2rem, 6vw, 4rem);
+}
+
+.category {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateY(2.5rem);
+  filter: blur(12px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category:last-child {
+  margin-bottom: 0;
+}
+
+.categoryVisible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.categoryLabel {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tag {
+  font-family: var(--font-title);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  padding: 0.625rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+}

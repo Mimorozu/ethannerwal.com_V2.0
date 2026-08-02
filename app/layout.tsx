@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import styles from "./layout.module.css";
+import { Footer } from "./components/footer";
 import { HeroGrid } from "./components/hero-grid";
 import { Nav } from "./components/nav";
 
@@ -18,7 +19,7 @@ const secondary = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ethannerwal.com",
+  title: "EthanNerwal.com",
   description: "",
 };
 
@@ -36,6 +37,7 @@ export default function RootLayout({
         <HeroGrid />
         <Nav />
         <div className={styles.content}>{children}</div>
+        <Footer />
       </body>
     </html>
   );
