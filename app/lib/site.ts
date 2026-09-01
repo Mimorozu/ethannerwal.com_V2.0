@@ -1,4 +1,4 @@
-export const SITE_URL = "https://ethannerwal.com";
+export const SITE_URL = "https://www.ethannerwal.com";
 export const SITE_NAME = "Ethan Nerwal";
 export const SITE_TITLE = "Ethan Nerwal — Full Stack Developer";
 export const SITE_DESCRIPTION =
