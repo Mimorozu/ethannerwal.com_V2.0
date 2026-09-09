@@ -7,10 +7,22 @@ import { ScrambleText } from "./scramble-text";
 import { useParallax } from "./use-parallax";
 import styles from "./hero-grid.module.css";
 
+type Route = {
+  path: string;
+  src: string;
+  title: string;
+  subtitle: string;
+  accent: boolean;
+  column: number;
+  parallax?: number;
+  imagePosition?: string;
+  mobileImagePosition?: string;
+};
+
 // Each route's image/copy renders into a fixed grid column: home owns column 2 (index 1),
 // while about/projects/contact all share column 3 (index 2) — column 1 stays empty and
 // column 4 (index 3) is reserved for the permanent nested-grid decoration below.
-const routes = [
+const routes: Route[] = [
   {
     path: "/",
     src: "/walk.webp",
