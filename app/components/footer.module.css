@@ -8,31 +8,43 @@
 
 .cta {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
   padding-inline: clamp(1.5rem, 6vw, 5rem);
-  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.ctaKicker {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
 .ctaText {
-  max-width: 40rem;
+  max-width: 34rem;
+  /* Pulls the heading up against the kicker's own line-height gap instead of the
+     larger flex `gap`, which was sized for the heading/button pairing below it. */
+  margin-top: -1rem;
 }
 
 .ctaHeading {
   font-family: var(--font-title);
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
   font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.05;
   color: var(--foreground);
 }
 
 .ctaSubtitle {
   margin-top: 1rem;
+  max-width: 34ch;
   font-family: var(--font-secondary);
-  font-size: 0.9375rem;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--muted-foreground);
 }
 
@@ -41,21 +53,24 @@
   align-items: center;
   gap: 0.625rem;
   flex-shrink: 0;
+  border: 1px solid var(--accent);
   border-radius: 9999px;
   padding: 0.875rem 0.875rem 0.875rem 1.5rem;
-  background: var(--foreground);
-  color: var(--background);
+  background: transparent;
+  color: var(--accent);
   font-family: var(--font-secondary);
   font-size: 0.875rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-decoration: none;
   white-space: nowrap;
-  transition: opacity 0.15s;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .ctaButton:hover {
-  opacity: 0.8;
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
 .ctaButtonIcon {
@@ -66,8 +81,13 @@
   height: 1.75rem;
   border-radius: 9999px;
   background: var(--background);
-  color: var(--foreground);
+  color: var(--accent);
   font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.ctaButton:hover .ctaButtonIcon {
+  transform: translate(2px, -2px);
 }
 
 .divider {

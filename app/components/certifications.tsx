@@ -10,12 +10,14 @@ const certifications = [
     issuer: "Amazon Web Services",
     // date: "Month Year",
     badgeUrl: "/aws-cloud-practitioner.png",
+    verifyUrl: "https://www.credly.com/badges/fcf0059e-19ba-48fa-ad44-a373b139e4c1/public_url",
   },
   {
     title: "Microsoft Certified: Azure Fundamentals",
     issuer: "Microsoft",
     // date: "Month Year",
     badgeUrl: "/azure-fundamentals.png",
+    verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-gb/EthanNerwal-3817/4A1B46223F1D683D?sharingId=18D0B72EF21991E3",
   },
 ];
 
@@ -53,7 +55,7 @@ export function Certifications() {
             Certifications
           </h2>
           <p className={`${styles.subtitle} ${titleVisible ? styles.titleVisible : ""}`}>
-            Placeholder — licenses and certifications earned along the way.
+            Licenses and certifications I've earned along the way
           </p>
         </div>
       </div>
@@ -73,12 +75,14 @@ function CertTile({
   issuer,
   date,
   badgeUrl,
+  verifyUrl,
   index,
 }: {
   title: string;
   issuer: string;
   date?: string;
   badgeUrl: string;
+  verifyUrl?: string;
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -116,6 +120,16 @@ function CertTile({
       <div className={styles.badge}>
         <img src={badgeUrl} alt="" className={styles.badgeImage} />
       </div>
+      {verifyUrl && (
+        <a
+          href={verifyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.verify}
+        >
+          Verify
+        </a>
+      )}
     </div>
   );
 }

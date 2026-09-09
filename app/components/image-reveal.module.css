@@ -7,7 +7,12 @@
     transform: scale(1.15);
   }
   to {
-    transform: scale(1);
+    /* Slightly over 1, not exactly 1 — at a true 1:1 scale the image's own edge lands
+       exactly on the clipping boundary, and filters like hero-grid's contrast(1.25)
+       amplify that edge's anti-aliasing into a visible bright fringe (worst on mobile
+       GPU rasterization). Staying a hair oversized keeps the true edge permanently
+       clipped out of view. */
+    transform: scale(1.02);
   }
 }
 

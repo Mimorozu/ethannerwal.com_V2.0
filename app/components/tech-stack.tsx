@@ -93,7 +93,7 @@ export function TechStack() {
             Tech Stack
           </h2>
           <p className={`${styles.subtitle} ${titleVisible ? styles.titleVisible : ""}`}>
-            Placeholder — the tools and technologies I work with.
+            The tools and technologies I work with.
           </p>
         </div>
       </div>
@@ -114,7 +114,6 @@ export function TechStack() {
               index={i}
             />
           ))}
-          <span className={styles.cursor} aria-hidden />
         </div>
       </div>
     </div>

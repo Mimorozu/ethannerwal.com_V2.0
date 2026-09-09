@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectDetail } from "../../components/project-detail";
 import { projects } from "../../components/projects-data";
+import { projectsInProduction } from "../../components/projects-in-production-data";
+
+const allProjects = [...projects, ...projectsInProduction];
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return allProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -13,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = allProjects.find((p) => p.slug === slug);
 
   if (!project) return {};
 
@@ -42,7 +45,7 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = allProjects.find((p) => p.slug === slug);
 
   if (!project) notFound();
 

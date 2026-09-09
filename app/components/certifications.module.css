@@ -14,6 +14,9 @@
 }
 
 .label {
+  align-self: start;
+  justify-self: start;
+  padding-top: 1.75rem;
   font-family: var(--font-secondary);
   font-size: 0.875rem;
   letter-spacing: 0.04em;
@@ -22,6 +25,7 @@
 }
 
 .headingGroup {
+  grid-column: 2 / 4;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -87,6 +91,8 @@
 }
 
 .number {
+  align-self: start;
+  justify-self: start;
   font-family: var(--font-secondary);
   font-size: 0.875rem;
   font-weight: 400;
@@ -123,8 +129,8 @@
 
 .badge {
   justify-self: end;
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,6 +144,29 @@
   object-fit: contain;
 }
 
+.verify {
+  grid-column: 4;
+  justify-self: start;
+  width: fit-content;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-family: var(--font-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: transparent;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.verify:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
 @media (max-width: 639px) {
   .label,
   .subtitle {
@@ -145,26 +174,32 @@
   }
 
   .title {
-    grid-template-columns: 1fr;
+    display: block;
     margin-bottom: 2rem;
   }
 
+  .headingGroup {
+    grid-column: auto;
+  }
+
   .tile {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     grid-template-areas:
-      "number badge"
-      "info info"
-      "date date";
-    row-gap: 0.5rem;
+      "badge info"
+      "date date"
+      "verify verify";
+    column-gap: 1rem;
+    row-gap: 0.875rem;
+    align-items: center;
   }
 
   .number {
-    grid-area: number;
-    align-self: center;
+    display: none;
   }
 
   .info {
     grid-area: info;
+    align-self: center;
   }
 
   .date {
@@ -173,5 +208,16 @@
 
   .badge {
     grid-area: badge;
+    justify-self: start;
+    align-self: center;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .verify {
+    grid-area: verify;
+    grid-column: auto;
+    justify-self: start;
+    padding-block: 0.75rem;
   }
 }

@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { ImageReveal } from "./image-reveal";
-import { projects, type Project } from "./projects-data";
+import { projectsInProduction } from "./projects-in-production-data";
+import type { Project } from "./projects-data";
 import styles from "./projects.module.css";
 
-export function Projects() {
+// Same layout/behavior as Projects — just a separate section and data source for work
+// that's still being built rather than already live.
+export function ProjectsInProduction() {
   const titleRef = useRef<HTMLDivElement>(null);
   const [titleVisible, setTitleVisible] = useState(false);
 
@@ -35,19 +38,19 @@ export function Projects() {
   return (
     <div className={styles.section}>
       <div ref={titleRef} className={styles.title}>
-        <span className={styles.label}>Selected Work</span>
+        <span className={styles.label}>In Progress</span>
         <div className={styles.headingGroup}>
           <h2 className={`${styles.heading} ${titleVisible ? styles.titleVisible : ""}`}>
-            Deployed Projects
+            In Production
           </h2>
           <p className={`${styles.subtitle} ${titleVisible ? styles.titleVisible : ""}`}>
-            A selection of things I&apos;ve built. Click one for more.
+            Currently being built. Not live yet.
           </p>
         </div>
       </div>
 
       <div className={styles.list}>
-        {projects.map((project, i) => (
+        {projectsInProduction.map((project, i) => (
           <ProjectTile key={project.slug} project={project} index={i} />
         ))}
       </div>
@@ -55,8 +58,6 @@ export function Projects() {
   );
 }
 
-// Same reveal as ServiceTile; clicking navigates to that project's detail page instead of
-// expanding in place.
 function ProjectTile({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);

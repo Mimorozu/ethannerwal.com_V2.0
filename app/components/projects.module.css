@@ -25,6 +25,7 @@
 }
 
 .headingGroup {
+  grid-column: 2 / 4;
   align-self: start;
   display: flex;
   flex-direction: column;
@@ -33,11 +34,12 @@
 
 .heading {
   font-family: var(--font-title);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--foreground);
   text-transform: uppercase;
+  white-space: nowrap;
   opacity: 0;
   mix-blend-mode: difference;
   transition: opacity 0.8s ease;
@@ -150,6 +152,10 @@
   color: var(--muted-foreground);
 }
 
+.tapHint {
+  display: none;
+}
+
 @media (max-width: 639px) {
   .subtitle,
   .label {
@@ -157,17 +163,48 @@
   }
 
   .title {
-    grid-template-columns: 1fr;
+    display: block;
     margin-bottom: 2rem;
+  }
+
+  .headingGroup {
+    grid-column: auto;
   }
 
   .list {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 1.5rem;
+  }
+
+  /* Full-viewport-height slides work on desktop, where hover/parallax and a large
+     canvas earn the immersion. On a phone that same height turns a 5-project list
+     into 5 separate full-screen scrolls — so mobile gets a shorter, poster-shaped
+     card instead, sized to preview the next one and keep the list scannable. */
+  .tile {
+    height: min(78vh, 34rem);
+  }
+
+  .imageOverlay {
+    /* Text now anchors to the bottom edge instead of the center, so the vignette
+       shifts with it — heaviest behind the copy, clear through the rest of the image. */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.1) 75%
+    );
+  }
+
+  .number {
+    display: none;
   }
 
   .overlayText {
-    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: left;
+    gap: 0.375rem;
+    padding: 1.5rem;
   }
 
   .name {
@@ -176,5 +213,36 @@
 
   .service {
     font-size: 0.9375rem;
+  }
+
+  /* Desktop hover already reads as interactive; touch has no hover, so mobile gets an
+     explicit "this is tappable" cue instead — a small nudging arrow, shown once the
+     card has settled in rather than immediately, so it reads as a hint, not a glitch. */
+  .tapHint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.25rem;
+    font-family: var(--font-secondary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+
+  .tapHintIcon {
+    animation: tap-hint-nudge 1.6s ease-in-out 1.2s infinite;
+  }
+
+  @keyframes tap-hint-nudge {
+    0%,
+    20%,
+    100% {
+      transform: translateX(0);
+    }
+    10% {
+      transform: translateX(4px);
+    }
   }
 }

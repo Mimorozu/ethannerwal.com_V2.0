@@ -21,28 +21,30 @@ const routes = [
   },
   {
     path: "/about",
-    src: "/street.jpg",
+    src: "/tunnell.avif",
     title: "About",
-    subtitle: "Placeholder — page content coming soon.",
+    subtitle: "Full stack developer — AWS & Azure certified, cloud-native by trade.",
     accent: true,
     column: 2,
   },
   {
     path: "/projects",
-    src: "/ring.png",
+    src: "/lake.avif",
     title: "Projects",
-    subtitle: "Placeholder — page content coming soon.",
+    subtitle: "Browse deployed applications and projects in production.",
     accent: true,
     column: 2,
     parallax: 1.8,
   },
   {
     path: "/contact",
-    src: "/contact-img.png",
+    src: "/eye.jpg",
     title: "Contact",
-    subtitle: "Full stack developer — let's talk about your project.",
+    subtitle: "Every project starts with a conversation. Let's talk about your project.",
     accent: true,
     column: 2,
+    imagePosition: "left center",
+    mobileImagePosition: "75% center",
   },
 ];
 
@@ -76,6 +78,15 @@ export function HeroGrid() {
                 priority={active.path === "/"}
                 sizes="(min-width: 640px) 25vw, 50vw"
                 className={styles.image}
+                style={
+                  active.imagePosition
+                    ? ({
+                        "--image-position": active.imagePosition,
+                        "--image-position-mobile":
+                          active.mobileImagePosition ?? active.imagePosition,
+                      } as React.CSSProperties)
+                    : undefined
+                }
               />
               <div className={styles.imageOverlay} />
             </>
@@ -127,6 +138,60 @@ function HeroCopy({
 }) {
   const lines = title.split("\n");
   const copyBoxRef = useParallax<HTMLDivElement>(0.3 * parallax, "margin");
+  const [typedLength, setTypedLength] = useState(0);
+  const [typing, setTyping] = useState(false);
+
+  // Types the subtitle out one character at a time, starting only once
+  // document.fonts.ready resolves — FitLine re-measures the title lines above when
+  // the title font finishes loading, which would otherwise shove a mid-type subtitle down.
+  // At the 20th character it stutters: backs up two characters, pauses, then retypes
+  // forward again, like a human catching a typo mid-sentence.
+  useEffect(() => {
+    setTypedLength(0);
+    setTyping(false);
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    document.fonts.ready.then(async () => {
+      if (cancelled) return;
+      setTyping(true);
+
+      let i = 0;
+      let stuttered = false;
+      while (i < subtitle.length) {
+        i++;
+        setTypedLength(i);
+        if (cancelled) return;
+
+        if (i === 20 && subtitle.length > 20 && !stuttered) {
+          stuttered = true;
+          await sleep(550);
+          if (cancelled) return;
+          for (let b = 0; b < 3; b++) {
+            i--;
+            setTypedLength(i);
+            await sleep(45);
+            if (cancelled) return;
+            if (b === 1) {
+              await sleep(300);
+              if (cancelled) return;
+            }
+          }
+          await sleep(500);
+          if (cancelled) return;
+          continue;
+        }
+
+        await sleep(40);
+      }
+
+      if (!cancelled) setTyping(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [subtitle]);
 
   return (
     <div className={styles.copy}>
@@ -135,7 +200,11 @@ function HeroCopy({
         {lines.map((line) => (
           <FitLine key={line} text={line} accent={accent} aria-hidden />
         ))}
-        <p className={styles.subtitle}>{subtitle}</p>
+        <p className={styles.srOnly}>{subtitle}</p>
+        <p className={styles.subtitle} aria-hidden>
+          {subtitle.slice(0, typedLength)}
+          {typing && <span className={styles.subtitleCursor} />}
+        </p>
       </div>
     </div>
   );

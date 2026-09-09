@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Projects as ProjectsList } from "../components/projects";
+import { ProjectsInProduction } from "../components/projects-in-production";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -11,5 +12,10 @@ export const metadata: Metadata = {
 
 // Hero copy for "/projects" renders inside HeroGrid; this page holds the below-the-fold content.
 export default function Projects() {
-  return <ProjectsList />;
+  return (
+    <>
+      <ProjectsList />
+      <ProjectsInProduction />
+    </>
+  );
 }

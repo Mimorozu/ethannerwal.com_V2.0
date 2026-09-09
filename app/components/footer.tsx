@@ -21,14 +21,12 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.cta}>
+        <span className={styles.ctaKicker}>Get In Touch</span>
         <div className={styles.ctaText}>
-          <h2 className={styles.ctaHeading}>
-            Fewer templates. More outcomes.
-            <br />
-            Software built to last.
-          </h2>
+          <h2 className={styles.ctaHeading}>Have a project in mind?</h2>
           <p className={styles.ctaSubtitle}>
-            Every project starts with a conversation — let&apos;s talk about yours.
+            No templates, no shortcuts — just software built around what your business
+            actually needs.
           </p>
         </div>
         <Link href="/contact" className={styles.ctaButton}>
