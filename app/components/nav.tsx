@@ -66,6 +66,7 @@ export function Nav() {
                 href={link.href}
                 className={styles.link}
                 onClick={() => setOpen(false)}
+                onNavigate={() => window.scrollTo(0, 0)}
               >
                 {link.label}
               </Link>
