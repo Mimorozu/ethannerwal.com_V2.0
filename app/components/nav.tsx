@@ -48,7 +48,7 @@ export function Nav() {
           {open && (
             <div className={styles.overlayImageFrame}>
               <ImageReveal
-                src="/car.avif"
+                src="/car.webp"
                 alt=""
                 fill
                 sizes="25vw"

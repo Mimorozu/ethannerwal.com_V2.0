@@ -17,7 +17,7 @@ export const projects: Project[] = [
     slug: "kitchen-worktops-experts",
     name: "Kitchen Worktops Experts",
     service: "Website / CRM / SEO",
-    imageUrl: "/kitchen.jpg",
+    imageUrl: "/kitchen.webp",
     description: [
       "Kitchen Worktop Experts - A newly launched business specialising in supplying and fitting bespoke luxury stone worktops. The team needed a system that reflected the elegance of their craftsmanship.",
       "I partnered closely with the client to understand its internal structure and workflow. This helped me gain a clear vision of what systems could be put in place to automate repetitive tasks and reduce friction between a customer's point of interest and final install.",

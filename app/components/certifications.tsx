@@ -9,14 +9,14 @@ const certifications = [
     title: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     // date: "Month Year",
-    badgeUrl: "/aws-cloud-practitioner.png",
+    badgeUrl: "/aws-cloud-practitioner.webp",
     verifyUrl: "https://www.credly.com/badges/fcf0059e-19ba-48fa-ad44-a373b139e4c1/public_url",
   },
   {
     title: "Microsoft Certified: Azure Fundamentals",
     issuer: "Microsoft",
     // date: "Month Year",
-    badgeUrl: "/azure-fundamentals.png",
+    badgeUrl: "/azure-fundamentals.webp",
     verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-gb/EthanNerwal-3817/4A1B46223F1D683D?sharingId=18D0B72EF21991E3",
   },
 ];

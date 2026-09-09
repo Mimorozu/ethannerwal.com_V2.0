@@ -13,7 +13,7 @@ import styles from "./hero-grid.module.css";
 const routes = [
   {
     path: "/",
-    src: "/walk.jpg",
+    src: "/walk.webp",
     title: "ETHAN\nNERWAL",
     subtitle: "Full stack developer — elevating businesses through better software.",
     accent: false,
@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: "/about",
-    src: "/tunnell.avif",
+    src: "/tunnell.webp",
     title: "About",
     subtitle: "Full stack developer — AWS & Azure certified, cloud-native by trade.",
     accent: true,
@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: "/projects",
-    src: "/lake.avif",
+    src: "/lake.webp",
     title: "Projects",
     subtitle: "Browse deployed applications and projects in production.",
     accent: true,
@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: "/contact",
-    src: "/eye.jpg",
+    src: "/eye.webp",
     title: "Contact",
     subtitle: "Every project starts with a conversation. Let's talk about your project.",
     accent: true,

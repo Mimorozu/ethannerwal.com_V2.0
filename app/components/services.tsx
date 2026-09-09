@@ -9,13 +9,13 @@ const services = [
     title: "Bespoke Software",
     description:
       "Custom-built applications tailored to your business logic, not templates.",
-    imageUrl: "/laptop.png",
+    imageUrl: "/laptop.webp",
   },
   {
     title: "AI Solutions",
     description:
       "AI-driven features and automation that give your product an edge.",
-    imageUrl: "/chip.jpg",
+    imageUrl: "/chip.webp",
     // The chip sits left-of-center in the source photo; the 4:3 tile crop otherwise
     // centers on the full 16:9 frame and cuts into it.
     imagePosition: "25% 40%",
