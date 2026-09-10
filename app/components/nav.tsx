@@ -14,6 +14,17 @@ const links = [
   { href: "/contact", label: "CONTACT" },
 ];
 
+// window.scrollTo(0, 0) called synchronously at click time (before the route swap) is
+// unreliable on mobile WebKit — it can get silently dropped around the navigation reflow.
+// Deferring a frame and hitting documentElement/body directly makes it stick everywhere.
+function scrollToTop() {
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+}
+
 // Floating menu button, pinned to the top-right corner; toggles a full-screen nav overlay.
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -66,7 +77,7 @@ export function Nav() {
                 href={link.href}
                 className={styles.link}
                 onClick={() => setOpen(false)}
-                onNavigate={() => window.scrollTo(0, 0)}
+                onNavigate={scrollToTop}
               >
                 {link.label}
               </Link>

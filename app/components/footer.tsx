@@ -12,6 +12,17 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
+// window.scrollTo(0, 0) called synchronously at click time (before the route swap) is
+// unreliable on mobile WebKit — it can get silently dropped around the navigation reflow.
+// Deferring a frame and hitting documentElement/body directly makes it stick everywhere.
+function scrollToTop() {
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+}
+
 // Structure borrowed from spacer.framer.ai's footer: a closing CTA line, a divider, four link
 // columns, and a full-bleed wordmark — recolored to this site's dark theme instead of copying
 // their light one.
@@ -29,7 +40,7 @@ export function Footer() {
             actually needs.
           </p>
         </div>
-        <Link href="/contact" className={styles.ctaButton}>
+        <Link href="/contact" className={styles.ctaButton} onNavigate={scrollToTop}>
           Start a project
           <span className={styles.ctaButtonIcon}>↗</span>
         </Link>
@@ -44,6 +55,7 @@ export function Footer() {
               key={link.href}
               href={link.href}
               className={`${styles.link} ${pathname === link.href ? styles.linkActive : ""}`}
+              onNavigate={scrollToTop}
             >
               {link.label}
             </Link>
